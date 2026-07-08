@@ -1,11 +1,10 @@
-# Minimal, course-consistent dependencies (Building Agentic AI Systems capstone).
-# Versions left unpinned to match the course lessons; pin if you need reproducibility.
+# Minimal set of dependencies. Versions left unpinned; pin if you need reproducibility.
 
 langchain                 # create_agent, langchain.tools, langchain.messages, AgentState
 langchain-openai          # ChatOpenAI -> OpenRouter (base_url + OPENROUTER_API_KEY)
 langgraph                 # @task/@entrypoint, InMemorySaver, interrupt, Command, RetryPolicy
 langchain-text-splitters  # RecursiveCharacterTextSplitter
-langchain-huggingface     # HuggingFaceEmbeddings (course default embedding model)
+langchain-huggingface     # HuggingFaceEmbeddings
 sentence-transformers     # backs the HF embeddings (pulls torch) — needed for a real embed step
 numpy                     # required by InMemoryVectorStore similarity search
 # langchain-core (InMemoryVectorStore, Document) and langsmith (tracing) install transitively with langchain.

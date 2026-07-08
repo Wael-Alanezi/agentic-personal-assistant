@@ -1,14 +1,14 @@
 """
-Personal Assistant with Subagents — Capstone (script version).
+Personal Assistant with Subagents (script version).
 
-Building Agentic AI Systems, Track A. A supervisor agent coordinates three
-subagents exposed as tools: a calendar subagent, a knowledge-base (RAG) subagent,
-and an email subagent whose send step pauses for human approval. All LLM calls go
-through OpenRouter; the API key is read from the OPENROUTER_API_KEY environment
-variable and is never hardcoded.
+A supervisor agent coordinates three subagents exposed as tools: a calendar
+subagent, a knowledge-base (RAG) subagent, and an email subagent whose send
+step pauses for human approval. All LLM calls go through OpenRouter; the API
+key is read from the OPENROUTER_API_KEY environment variable and is never
+hardcoded.
 
 This is the same program as capstone.ipynb, as a runnable script. Definitions run at
-import time; the rubric demos run under `if __name__ == "__main__"`.
+import time; the demos run under `if __name__ == "__main__"`.
 
 Run:
     pip install -r requirements.txt
@@ -41,7 +41,7 @@ assert _load_key("OPENROUTER_API_KEY"), (
     "Set OPENROUTER_API_KEY as an environment variable (or a Colab secret)."
 )
 
-# Rubric 8: LangSmith tracing — optional, degrades gracefully if no key.
+# LangSmith tracing — optional, degrades gracefully if no key.
 if _load_key("LANGSMITH_API_KEY"):
     os.environ["LANGSMITH_TRACING"] = "true"
     os.environ.setdefault("LANGSMITH_PROJECT", "agentic-personal-assistant")
@@ -50,7 +50,7 @@ else:
 
 from langchain_openai import ChatOpenAI
 
-# All LLM calls go through OpenRouter, using the course's free default model.
+# All LLM calls go through OpenRouter, using a free default model.
 llm = ChatOpenAI(
     model="nvidia/nemotron-3-nano-30b-a3b:free",
     temperature=0,
@@ -178,7 +178,7 @@ from langgraph.types import interrupt, Command, RetryPolicy
 from langgraph.checkpoint.memory import InMemorySaver
 
 
-# Rubric 1: structured output — the draft is a typed object, not free text.
+# Structured output — the draft is a typed object, not free text.
 class EmailDraft(TypedDict):
     to: str
     subject: str
@@ -323,7 +323,7 @@ def show_interrupt(result):
 
 
 # ---------------------------------------------------------------------------
-# Demos (rubric evidence) — run only when executed as a script
+# Demos — run only when executed as a script
 # ---------------------------------------------------------------------------
 
 def main():

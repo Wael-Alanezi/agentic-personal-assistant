@@ -1,7 +1,5 @@
 # Personal Assistant with Subagents
 
-Capstone for **Building Agentic AI Systems** — Track A (Personal Assistant with Subagents).
-
 A **supervisor** agent coordinates three specialist **subagents exposed as tools**:
 
 - **Calendar subagent** — schedules events (tool stubs, no real calendar API).
@@ -12,12 +10,6 @@ All LLM calls go through **OpenRouter**; the API key is read from an environment
 
 - [`capstone.ipynb`](capstone.ipynb) — end-to-end notebook (runs top-to-bottom).
 - [`capstone.py`](capstone.py) — runnable script version (`python capstone.py`).
-
-## Team members
-
-- Wael Alanezi
-- Saud Albander
-- Abdullah Alshahrani
 
 ## Architecture
 
@@ -35,20 +27,7 @@ All LLM calls go through **OpenRouter**; the API key is read from an environment
                                                        draft ▶ approve ▶ send)
 ```
 
-## Rubric coverage
-
-| # | Section | Where |
-|---|---|---|
-| 1 | Agent fundamentals (real tool calls + structured output) | Tools, subagents, `EmailDraft` via `with_structured_output` |
-| 2 | Multi-agent / routing (supervisor + subagents-as-tools) | §5 Supervisor |
-| 3 | RAG pipeline (load→split→embed→store→retrieve; Agentic RAG) | §3 KB subagent |
-| 4 | Context & state (short-term checkpointer + long-term custom state) | §5–6 |
-| 5 | Human-in-the-loop (`interrupt()` before send) | §4 and §6 email demos |
-| 6 | Functional API + error handling (`@task`/`@entrypoint`, retry + bubble-up) | §4 Email workflow |
-| 7 | Workflow pattern (**Prompt Chaining**) | §4 Email workflow |
-| 8 | LangSmith observability | §0 setup + §7 |
-
-See [`WRITEUP.md`](WRITEUP.md) for one paragraph per section explaining the pattern used and why.
+See [`WRITEUP.md`](WRITEUP.md) for a design note on each architectural piece and why it was chosen.
 
 ## Setup & run (local)
 
@@ -73,13 +52,13 @@ python capstone.py
    %cd agentic-personal-assistant
    ```
    (or upload the `knowledge_base/` folder via the Files panel).
-3. Add your key in the **Secrets** panel (🔑): name `OPENROUTER_API_KEY`, paste your value.
+3. Open the Secrets panel (🔑) and add a secret named `OPENROUTER_API_KEY` with your value.
    The notebook reads `os.environ` first and falls back to Colab Secrets automatically.
-4. `Runtime ▸ Run all`.
+4. Run `Runtime ▸ Run all`.
 
 ## Notes
 
-- The calendar and email integrations are **stubs** by design (course requirement) — they return
+- The calendar and email integrations are **stubs** by design — they return
   formatted strings instead of calling real APIs.
-- Default model is the course's free `nvidia/nemotron-3-nano-30b-a3b:free`. If structured output or
+- Default model is the free `nvidia/nemotron-3-nano-30b-a3b:free`. If structured output or
   tool-calling is unreliable on the free tier, swap `llm.model` for a stronger OpenRouter model.
